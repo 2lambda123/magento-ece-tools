@@ -130,7 +130,7 @@ class SplitDbCest extends AbstractCest
                     'The SPLIT_DB variable contains the invalid value.',
                     'It should be array with next available values: [quote, sales].'
                 ],
-                'splitDbTypes' => ['checkout'],
+                'splitDbTypes' => 'checkout','Invalid Split Db label',
             ],
             'Deploy \'Split Db\' with the invalid and valid Split Db labels' => [
                 'messages' => [
@@ -151,7 +151,7 @@ class SplitDbCest extends AbstractCest
     private function variationsDataPartWithSplitDbArch(): array
     {
         return [
-            'Run splitting database for `quote` tables' => [
+            'Run splitting database for quote tables' => [
                 'splitDbTypes' => ['quote'],
                 'messages' => [
                     'INFO: Quote tables were split to DB magento2 in db-quote',
@@ -219,7 +219,7 @@ class SplitDbCest extends AbstractCest
     /**
      * @param CliTester $I
      */
-    private function runDeploy(CliTester $I)
+    private function runSplitDbDeployment(CliTester $I)
     {
         $I->startEnvironment();
         $I->runDockerComposeCommand('run build cloud-build');
@@ -230,7 +230,7 @@ class SplitDbCest extends AbstractCest
      * @param CliTester $I
      * @param $splitTypes
      */
-    private function setSplitDbTypesIntoMagentoEnvYaml(CliTester $I, $splitTypes = null)
+    private function setSplitDbTypes(CliTester $I, $splitTypes = null)
     {
         $config = $I->readEnvMagentoYaml();
         if (null !== $splitTypes) {
