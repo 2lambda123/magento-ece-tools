@@ -52,11 +52,11 @@ class ConfigFileExists implements ValidatorInterface
      *
      * {@inheritdoc}
      */
-    public function validate(): Validator\ResultInterface
+    public function validateConfigFile(): Validator\ResultInterface
     {
-        $configFile = $this->fileList->getConfig();
+        $configFilePath = $this->fileList->getConfig();
 
-        if (!$this->file->isExists($configFile)) {
+        if (!$this->file->isExists($configFilePath)) {
             $error = 'File app/etc/config.php does not exist';
             $suggestion = implode(
                 PHP_EOL,
